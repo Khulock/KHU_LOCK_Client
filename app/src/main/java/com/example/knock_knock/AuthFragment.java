@@ -1,23 +1,16 @@
 package com.example.knock_knock;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
-import com.example.knock_knock.Service.AuthManager;
+import com.example.knock_knock.Auth.AuthManager;
 import com.example.knock_knock.databinding.FragmentAuthBinding;
-
-import java.util.concurrent.Executor;
 
 public class AuthFragment extends Fragment {
 
