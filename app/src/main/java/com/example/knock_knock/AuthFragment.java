@@ -14,14 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.example.knock_knock.Service.AuthManager;
+import com.example.knock_knock.databinding.FragmentAuthBinding;
+
 import java.util.concurrent.Executor;
 
 public class AuthFragment extends Fragment {
 
-    private BiometricPrompt.PromptInfo mBiometricPromptInfo;
-    private Executor mMainExecutor;
-    private BiometricPrompt mBiometricPrompt;
-    private Context mContext;
+    private FragmentAuthBinding mBinding;
 
     public AuthFragment() {
     }
@@ -29,44 +29,22 @@ public class AuthFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mContext = requireContext();
-
-
-        mMainExecutor = ContextCompat.getMainExecutor(mContext);
-        mBiometricPrompt = new BiometricPrompt(this, mMainExecutor, new BiometricPrompt.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                Toast.makeText(mContext, "AUTH SUCCESS", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-                Toast.makeText(mContext, "FAIL AUTH", Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
-        mBiometricPromptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Knock Knock")
-                .setSubtitle("문을 열기 위해 생체 인증을 진행해주세요")
-                .setDeviceCredentialAllowed(false)
-                .setNegativeButtonText("NO")
-                .build();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_auth, container, false);
+
+        mBinding = FragmentAuthBinding.inflate(inflater, container, false);
+
+        return mBinding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        mBinding.btn.setOnClickListener(view -> {
+            new AuthManager(requireContext()).runAuth();
+        });
     }
 }

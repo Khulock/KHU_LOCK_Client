@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.knock_knock.Service.AuthManager;
+
 import java.util.concurrent.Executor;
 
 public class AuthActivity extends AppCompatActivity {
@@ -20,53 +22,20 @@ public class AuthActivity extends AppCompatActivity {
     private Executor mMainExecutor;
     private BiometricPrompt mBiometricPrompt;
     private BiometricPrompt.PromptInfo mBiometricPromptInfo;
+    private AuthManager authManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        mContext = this;
-
-
-        mMainExecutor = ContextCompat.getMainExecutor(mContext);
-        mBiometricPrompt = new BiometricPrompt(this, mMainExecutor, new BiometricPrompt.AuthenticationCallback() {
-            @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                Toast.makeText(mContext, "AUTH SUCCESS", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-                Toast.makeText(mContext, "FAIL AUTH", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-            }
-        });
-
-
-
-        mBiometricPromptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Knock Knock")
-                .setSubtitle("문을 열기 위해 생체 인증을 진행해주세요")
-                .setDeviceCredentialAllowed(false)
-                .setNegativeButtonText("NO")
-                .build();
-
+        getSupportFragmentManager().beginTransaction().add(R.id.frame, new AuthFragment()).commit();
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        findViewById(R.id.btn).setOnClickListener(view -> {
-            mBiometricPrompt.authenticate(mBiometricPromptInfo);
-        });
     }
 
 }
