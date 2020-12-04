@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".HomeFragment"
+        style="@style/root">
+
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:layout_weight="3"
+                android:maxLines="1"
+                style="@style/TextAppearance.MaterialComponents.Headline1"
+                android:text="Tester's House"
+                android:gravity="center" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:textSize="0sp"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                style="@style/Widget.MaterialComponents.Button"
+                android:text="OUT" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/recycle_device_item"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintHeight_percent="0.05"
+            android:text="Devices"
+            android:autoSizeTextType="uniform"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_device_item"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            android:layout_marginBottom="60dp"
+            tools:listitem="@layout/device_item"
+            tools:itemCount="5"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

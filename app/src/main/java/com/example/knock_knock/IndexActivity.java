@@ -9,7 +9,7 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.activity_index);
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame, new AuthFragment()).commit();
     }
