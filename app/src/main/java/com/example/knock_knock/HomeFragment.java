@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         mBinding.recycleDeviceItem.setLayoutManager(layoutManager);
 
-        DeviceListAdapter deviceListAdapter = new DeviceListAdapter(list);
+        DeviceListAdapter deviceListAdapter = new DeviceListAdapter(list, requireContext());
         mBinding.recycleDeviceItem.setAdapter(deviceListAdapter);
     }
 }

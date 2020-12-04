@@ -21,14 +21,19 @@ public class ControlDialog {
         mDialogBuilder = new MaterialAlertDialogBuilder(mContext);
     }
 
-    public void show(List<String> deviceList) {
-        CharSequence[] mDeviceList = deviceList.toArray(new CharSequence[deviceList.size()]);
+    public void show(List<String> controlList) {
+        CharSequence[] mDeviceList = controlList.toArray(new CharSequence[controlList.size()]);
+        show(mDeviceList);
+    }
+
+    public void show(CharSequence[] controlList) {
         mDialogBuilder.setTitle("Control panel")
-                .setSingleChoiceItems(mDeviceList, 1, ((dialog, which) -> {
+                .setSingleChoiceItems(controlList, 1, ((dialog, which) -> {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    Toast.makeText(mContext, mDeviceList[checked], Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, controlList[checked], Toast.LENGTH_LONG).show();
                 }).show();
     }
+
 }
