@@ -20,9 +20,9 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
+        setContentView(R.layout.device_item);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame, new AuthFragment()).commit();
+//        getSupportFragmentManager().beginTransaction().add(R.id.frame, new AuthFragment()).commit();
     }
 
 
