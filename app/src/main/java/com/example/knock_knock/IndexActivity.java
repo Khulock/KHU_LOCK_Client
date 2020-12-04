@@ -11,7 +11,7 @@ public class IndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame, new AuthFragment()).commit();
     }
 
 
