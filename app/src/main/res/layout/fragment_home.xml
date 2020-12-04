@@ -1,48 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
-    style="@style/root"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        tools:context=".HomeFragment"
+        style="@style/root">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:autoSizeTextType="uniform"
-            android:layout_weight="3"
-            android:textAlignment="viewStart"
-            android:maxLines="1"
-            style="@style/TextAppearance.MaterialComponents.Headline3"
-            android:text="Tester's House"
-            />
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="퇴실하기"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:autoSizeTextType="uniform"
+                android:layout_weight="3"
+                android:maxLines="1"
+                style="@style/TextAppearance.MaterialComponents.Headline1"
+                android:text="Tester's House"
+                android:gravity="center" />
 
-            />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:textSize="0sp"
+                android:autoSizeTextType="uniform"
+                android:maxLines="1"
+                style="@style/Widget.MaterialComponents.Button"
+                android:text="OUT" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            android:layout_marginBottom="60dp"
+            style="?attr/materialCardViewStyle">
+
+            <LinearLayout
+                android:id="@+id/layout_device_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+                <include
+                    layout="@layout/device_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3" />
+
+                <include
+                    layout="@layout/device_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3" />
+
+            </LinearLayout>
 
 
+        </com.google.android.material.card.MaterialCardView>
 
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
