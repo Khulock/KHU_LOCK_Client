@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp"
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
@@ -43,7 +44,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="3"
-                        android:text="Living Room light"
+                        android:text="@{name}"
                         android:maxLines="1"
                         android:gravity="center"
                         android:textSize="0sp"
