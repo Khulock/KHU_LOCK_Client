@@ -1,4 +1,4 @@
-package com.example.knock_knock;
+package com.example.knock_knock.Component;
 
 import android.content.Context;
 import android.widget.ListAdapter;
@@ -12,13 +12,15 @@ public class ControlDialog {
 
     private final MaterialAlertDialogBuilder mDialogBuilder;
     private Context mContext;
+    private ControlDialogInterface dialogInterface;
     private int checked = 1;
 
 
 
-    public ControlDialog(Context context) {
+    public ControlDialog(Context context, ControlDialogInterface dialogInterface) {
         mContext = context;
         mDialogBuilder = new MaterialAlertDialogBuilder(mContext);
+        this.dialogInterface = dialogInterface;
     }
 
     public void show(List<String> controlList) {
@@ -32,8 +34,10 @@ public class ControlDialog {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    Toast.makeText(mContext, controlList[checked], Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "Change level to " + controlList[checked], Toast.LENGTH_LONG).show();
+                    dialogInterface.changeLevel(checked);
                 }).show();
     }
+
 
 }

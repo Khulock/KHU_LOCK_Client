@@ -1,13 +1,11 @@
 package com.example.knock_knock.DTO;
 
-public class DeviceInfo {
+public class UserInfo {
     private String name;
-    private String id;
-    private int level = 0;
+    private int id;
+    private String token;
 
-
-
-    public DeviceInfo(String name, String id) {
+    public UserInfo(String name, int id) {
         this.name = name;
         this.id = id;
     }
@@ -15,23 +13,24 @@ public class DeviceInfo {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getLevel() {
-        return level;
+    public String getToken() {
+        return token;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

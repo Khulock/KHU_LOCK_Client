@@ -1,6 +1,6 @@
 package com.example.knock_knock.Internet;
 
-import com.example.knock_knock.Const;
+import com.example.knock_knock.Component.Const;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

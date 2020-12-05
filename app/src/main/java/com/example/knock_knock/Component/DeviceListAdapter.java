@@ -1,17 +1,13 @@
-package com.example.knock_knock.Service;
+package com.example.knock_knock.Component;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.knock_knock.Const;
-import com.example.knock_knock.ControlDialog;
 import com.example.knock_knock.DTO.DeviceInfo;
-import com.example.knock_knock.R;
 import com.example.knock_knock.databinding.DeviceItemBinding;
 
 import java.util.ArrayList;
@@ -21,10 +17,16 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
     private final Context mContext;
     private List<DeviceInfo> mList;
+    private ControlDialogInterface dialogInterface;
 
-    public DeviceListAdapter(List<DeviceInfo> mList, Context context) {
+    public DeviceListAdapter(List<DeviceInfo> mList, Context context, ControlDialogInterface dialogInterface) {
         this.mList = mList;
         this.mContext = context;
+        this.dialogInterface = dialogInterface;
+
+        if (mList == null) {
+            this.mList = new ArrayList<>();
+        }
     }
 
     @NonNull
@@ -52,7 +54,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
             mBinding = binding;
             mBinding.btnSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    new ControlDialog(mContext).show(Const.CONTROL_LIGHT);
+                    new ControlDialog(mContext, dialogInterface).show(Const.CONTROL_LIGHT);
                 }
             });
         }

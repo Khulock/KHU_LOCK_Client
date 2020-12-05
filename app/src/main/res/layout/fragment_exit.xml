@@ -10,8 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Fragment.HomeFragment"
-        style="@style/root">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        tools:context=".Fragment.ExitFragment">
 
         <LinearLayout
             android:id="@+id/layout_title"
@@ -28,54 +29,62 @@
                 android:layout_height="match_parent"
                 android:autoSizeTextType="uniform"
                 android:layout_weight="3"
+                android:paddingTop="20dp"
+                android:textAlignment="textStart"
+
                 android:maxLines="1"
                 style="@style/TextAppearance.MaterialComponents.Headline1"
-                android:text="Tester's House"
-                android:gravity="center" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/btn_out"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:textSize="0sp"
-                android:autoSizeTextType="uniform"
-                android:maxLines="1"
-                style="@style/Widget.MaterialComponents.Button"
-                android:text="OUT" />
+                android:text="Exit House" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/recycle_device_item"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginBottom="20dp"
             app:layout_constraintHeight_percent="0.05"
-            android:text="Devices"
             android:autoSizeTextType="uniform"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
-            />
+            app:layout_constraintTop_toBottomOf="@id/layout_title"
+            android:layout_marginTop="30dp"
+
+            android:text="Routine" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_device_item"
+            android:id="@+id/recycler_device_item"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:layout_marginTop="30dp"
+
+            tools:listitem="@layout/device_item"
+            />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btn"
+
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHeight_percent="0.6"
-            android:layout_marginBottom="60dp"
-            tools:listitem="@layout/device_item"
-            tools:itemCount="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:layout_marginBottom="30dp"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="2.5"
+            app:layout_constraintHeight_percent="0.10"
+
+            app:icon="@drawable/ic_baseline_power_settings_new_24"
+            app:iconPadding="30dp"
+            app:iconSize="@android:dimen/app_icon_size"
+
+            android:text="Exit house"
+            android:autoSizeTextType="uniform"
+            style="?attr/materialButtonStyle"
             />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
