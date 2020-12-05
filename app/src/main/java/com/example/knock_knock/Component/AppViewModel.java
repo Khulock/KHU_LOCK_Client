@@ -10,6 +10,7 @@ import com.example.knock_knock.DTO.DeviceInfo;
 import com.example.knock_knock.DTO.LogInfo;
 import com.example.knock_knock.DTO.UserInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppViewModel extends AndroidViewModel {
@@ -20,14 +21,19 @@ public class AppViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<DeviceInfo>> deviceInfoList;
     private MutableLiveData<List<LogInfo>> logInfoList;
-
+    private MutableLiveData<List<DeviceInfo>> outDeviceList;
 
 
 
     public AppViewModel(@NonNull Application application) {
         super(application);
-        deviceInfoList = new MutableLiveData<List<DeviceInfo>>();
+        deviceInfoList = new MutableLiveData<>();
         logInfoList = new MutableLiveData<>();
+        outDeviceList = new MutableLiveData<>();
+
+        deviceInfoList.setValue(new ArrayList<>());
+        logInfoList.setValue(new ArrayList<>());
+        outDeviceList.setValue(new ArrayList<>());
     }
 
     public AppViewModel() {
@@ -35,6 +41,15 @@ public class AppViewModel extends AndroidViewModel {
     }
 
 
+    public MutableLiveData<List<DeviceInfo>> observeOutDeviceList() { return outDeviceList; }
+
+    public List<DeviceInfo> getOutDeviceList() {
+        return outDeviceList.getValue();
+    }
+
+    public void setOutDeviceList(List<DeviceInfo> outDeviceList) {
+        this.outDeviceList.postValue(outDeviceList);
+    }
 
     public MutableLiveData<List<DeviceInfo>> observeDeviceInfoList() {
         return deviceInfoList;
@@ -49,7 +64,7 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     public void setLogInfoList(List<LogInfo> logInfoList) {
-        this.logInfoList.setValue(logInfoList);
+        this.logInfoList.postValue(logInfoList);
     }
 
     public DeviceInfo getCurDevice() {
@@ -65,7 +80,7 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     public void setDeviceInfoList(List<DeviceInfo> deviceInfoList) {
-        this.deviceInfoList.setValue(deviceInfoList);
+        this.deviceInfoList.postValue(deviceInfoList);
     }
 
     public UserInfo getUserInfo() {

@@ -37,8 +37,9 @@
                 android:text="Exit House" />
         </LinearLayout>
 
+
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/recycler_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.05"
@@ -48,12 +49,28 @@
 
             android:text="Routine" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_out"
+            app:layout_constraintTop_toTopOf="@id/recycler_title"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_title"
+            app:layout_constraintRight_toRightOf="@id/recycler_device_item"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:icon="@drawable/ic_sharp_add_24"
+            android:text="Add"
+            android:gravity="center"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_device_item"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.6"
-            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/recycler_title"
             android:layout_marginTop="30dp"
 
             tools:listitem="@layout/item_device"

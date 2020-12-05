@@ -1,13 +1,19 @@
 package com.example.knock_knock.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserInfo {
     private String name;
     private int id;
     private String token;
 
+    private List<DeviceInfo> outDevice;
+
     public UserInfo(String name, int id) {
         this.name = name;
         this.id = id;
+        outDevice = new ArrayList<>();
     }
 
     public String getName() {

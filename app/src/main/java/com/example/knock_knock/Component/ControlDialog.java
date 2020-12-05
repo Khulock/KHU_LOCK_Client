@@ -1,7 +1,6 @@
 package com.example.knock_knock.Component;
 
 import android.content.Context;
-import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -23,19 +22,21 @@ public class ControlDialog {
         this.dialogInterface = dialogInterface;
     }
 
-    public void show(List<String> controlList) {
+
+
+    public void show(String tag, List<String> controlList) {
         CharSequence[] mDeviceList = controlList.toArray(new CharSequence[controlList.size()]);
-        show(mDeviceList);
+        show(tag, mDeviceList);
     }
 
-    public void show(CharSequence[] controlList) {
+    public void show(String tag, CharSequence[] controlList) {
         mDialogBuilder.setTitle("Control panel")
-                .setSingleChoiceItems(controlList, 1, ((dialog, which) -> {
+                .setSingleChoiceItems(controlList, -1, ((dialog, which) -> {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
                     Toast.makeText(mContext, "Change level to " + controlList[checked], Toast.LENGTH_LONG).show();
-                    dialogInterface.changeLevel(checked);
+                    dialogInterface.callbackControlDialog(tag, checked);
                 }).show();
     }
 

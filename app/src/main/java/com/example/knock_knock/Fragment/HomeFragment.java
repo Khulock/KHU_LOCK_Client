@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
 
         // Log Recycler view binding
         LogAdapter logAdapter = new LogAdapter(null);
-        mBinding.recycleLogItem.setLayoutManager(layoutManager);
+        mBinding.recycleLogItem.setLayoutManager(new LinearLayoutManager(requireContext()));
         mBinding.recycleLogItem.setAdapter(logAdapter);
         mViewModel.observeLogInfoList().observe(this, logInfoList -> {
             logAdapter.setLogs(logInfoList);
@@ -102,8 +102,8 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
     }
 
     @Override
-    public boolean changeLevel(int input) {
-        mViewModel.getCurDevice().setLevel(input);
+    public boolean callbackControlDialog(String tag, int index) {
+        mViewModel.getCurDevice().setLevel(index);
         return false;
     }
 }
