@@ -25,4 +25,15 @@ public interface ApiService {
             @Header("Authorization") String token,
             @Path("user_id") Integer userId
     );
+
+    @GET("/device/run/{device_id}")
+    Call<JsonObject> callToggleDevice(
+            @Path("device_id") String deviceId
+    );
+
+    @GET("/user/out")
+    Call<JsonObject> callOutDoor(
+            @Header("Authorization") String token
+    );
+
 }

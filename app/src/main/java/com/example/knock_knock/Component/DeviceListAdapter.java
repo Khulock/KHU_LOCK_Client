@@ -29,6 +29,10 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
         }
     }
 
+    public void setDeviceList(List<DeviceInfo> mList) {
+        this.mList = mList;
+    }
+
     @NonNull
     @Override
     public DeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

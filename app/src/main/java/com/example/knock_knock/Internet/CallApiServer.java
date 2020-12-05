@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.knock_knock.Component.Const;
 import com.example.knock_knock.Component.AppViewModel;
+import com.example.knock_knock.DTO.DeviceInfo;
 import com.example.knock_knock.DTO.LogInfo;
 import com.example.knock_knock.DTO.UserInfo;
 import com.example.knock_knock.IndexActivity;
@@ -38,7 +39,7 @@ public class CallApiServer {
         mApiService = RetrofitClient.getApiService();
     }
 
-    public void openDoor() {
+    public void callOpenDoor() {
 
         HashMap<String, String> body = new HashMap<>();
         body.put("user_name", Const.USER_NAME);
@@ -62,7 +63,7 @@ public class CallApiServer {
         });
     }
 
-    public void getHistory() {
+    public void callGetHistory() {
 
         Call<JsonObject> call = mApiService.callGetInoutLog(mViewModel.getUserInfo().getToken(), mViewModel.getUserInfo().getId());
 
@@ -92,7 +93,35 @@ public class CallApiServer {
 
             }
         });
+    }
 
+    public void callToggleDevice(DeviceInfo deviceInfo) {
+        Call<JsonObject> call = mApiService.callToggleDevice(deviceInfo.getId());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+            }
+        });
+    }
+
+    public void callOutDoor(UserInfo user) {
+        Call<JsonObject> call = mApiService.callOutDoor(user.getToken());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
     }
 
 

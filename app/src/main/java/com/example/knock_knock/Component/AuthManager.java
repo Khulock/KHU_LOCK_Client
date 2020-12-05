@@ -28,7 +28,7 @@ public class AuthManager {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(mContext, "AUTH SUCCESS", Toast.LENGTH_LONG).show();
-                apiServer.openDoor();
+                apiServer.callOpenDoor();
             }
 
             @Override

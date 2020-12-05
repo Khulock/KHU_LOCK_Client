@@ -3,7 +3,6 @@ package com.example.knock_knock.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,7 +15,6 @@ import com.example.knock_knock.Component.LogAdapter;
 import com.example.knock_knock.DTO.DeviceInfo;
 import com.example.knock_knock.Component.DeviceListAdapter;
 import com.example.knock_knock.Component.AppViewModel;
-import com.example.knock_knock.DTO.LogInfo;
 import com.example.knock_knock.IndexActivity;
 import com.example.knock_knock.Internet.CallApiServer;
 import com.example.knock_knock.databinding.FragmentHomeBinding;
@@ -52,13 +50,14 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
 
     public void mockingData() {
         List<DeviceInfo> list = new ArrayList<>();
+
+        // Server - 500
         DeviceInfo deviceInfo = new DeviceInfo("AAA", "BBB");
         list.add(deviceInfo);
-
         DeviceInfo deviceInfo2 = new DeviceInfo("CCC", "DDD");
         list.add(deviceInfo2);
 
-        mCaller.openDoor();
+        mCaller.callOpenDoor();
 
         mViewModel.setDeviceInfoList(list);
         mViewModel.setCurDevice(list.get(0));
@@ -71,19 +70,23 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
         mockingData();
 
         mBinding.btnOut.setOnClickListener(view -> {
-//            ((IndexActivity)getActivity()).changeFragment("EXIT");
-            mCaller.getHistory();
+            ((IndexActivity)getActivity()).changeFragment("EXIT");
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
 
+        // Device List Recycler view binding
         mBinding.recycleDeviceItem.setLayoutManager(layoutManager);
-
         DeviceListAdapter deviceListAdapter = new DeviceListAdapter(mViewModel.getDeviceInfoList(), requireContext(), this);
         mBinding.recycleDeviceItem.setAdapter(deviceListAdapter);
+        mViewModel.observeDeviceInfoList().observe(this, deviceInfos -> {
+            deviceListAdapter.setDeviceList(deviceInfos);
+            deviceListAdapter.notifyDataSetChanged();
+        });
 
-        // Log view binding
+        // Log Recycler view binding
         LogAdapter logAdapter = new LogAdapter(null);
+        mBinding.recycleLogItem.setLayoutManager(layoutManager);
         mBinding.recycleLogItem.setAdapter(logAdapter);
         mViewModel.observeLogInfoList().observe(this, logInfoList -> {
             logAdapter.setLogs(logInfoList);
