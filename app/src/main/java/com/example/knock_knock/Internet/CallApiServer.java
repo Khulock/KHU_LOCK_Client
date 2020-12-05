@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.example.knock_knock.Component.Const;
 import com.example.knock_knock.Component.DeviceViewModel;
 import com.example.knock_knock.DTO.UserInfo;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
@@ -28,9 +27,9 @@ public class CallApiServer {
 
     public void callEnter() {
 
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("user_name", Const.NAME);
-        body.put("door_mac", "AA:BB:CC:DD:EE:FF");
+        HashMap<String, String> body = new HashMap<>();
+        body.put("user_name", Const.USER_NAME);
+        body.put("door_mac", Const.USER_MAC);
 
         Call<JsonObject> call = RetrofitClient.getApiService().openDoor(body);
 
@@ -44,7 +43,7 @@ public class CallApiServer {
                 int id = response.body().getAsJsonObject("data").get("id").getAsInt();
                 String token = response.body().getAsJsonObject("data").get("token").getAsString();
 
-                UserInfo userInfo = new UserInfo(Const.NAME, id);
+                UserInfo userInfo = new UserInfo(Const.USER_NAME, id);
                 userInfo.setToken(token);
                 mViewModel.setUserInfo(userInfo);
             }

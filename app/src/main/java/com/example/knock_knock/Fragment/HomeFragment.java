@@ -61,10 +61,12 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        mBinding.recycleDeviceItem.setLayoutManager(layoutManager);
 
+        mBinding.recycleDeviceItem.setLayoutManager(layoutManager);
         DeviceListAdapter deviceListAdapter = new DeviceListAdapter(mViewModel.getDeviceInfoList(), requireContext(), this);
         mBinding.recycleDeviceItem.setAdapter(deviceListAdapter);
+
+
     }
 
 

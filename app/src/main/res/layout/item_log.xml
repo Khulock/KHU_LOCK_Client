@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="inout"
+            type="String" />
+
+        <variable
+            name="time"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@{inout}"
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:gravity="center"
+
+            style="?attr/textAppearanceHeadline2"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@{time}"
+
+            android:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:gravity="center"
+
+            style="?attr/textAppearanceHeadline2"
+            />
+
+
+    </LinearLayout>
+</layout>

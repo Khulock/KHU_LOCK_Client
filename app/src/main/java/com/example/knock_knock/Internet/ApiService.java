@@ -14,7 +14,6 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @FormUrlEncoded
     @POST("/user/auth")
-    Call<JsonObject> openDoor(@FieldMap HashMap<String, Object> param);
+    Call<JsonObject> openDoor(@Body HashMap<String, String> param);
 }

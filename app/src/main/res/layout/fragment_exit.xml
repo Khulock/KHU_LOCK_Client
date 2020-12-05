@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             android:layout_marginTop="30dp"
 
-            tools:listitem="@layout/device_item"
+            tools:listitem="@layout/item_device"
             />
 
 

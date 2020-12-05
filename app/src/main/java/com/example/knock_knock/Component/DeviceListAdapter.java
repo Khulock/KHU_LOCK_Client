@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.knock_knock.DTO.DeviceInfo;
-import com.example.knock_knock.databinding.DeviceItemBinding;
+import com.example.knock_knock.databinding.ItemDeviceBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
     @NonNull
     @Override
     public DeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DeviceViewHolder(DeviceItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new DeviceViewHolder(ItemDeviceBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -47,9 +47,9 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
     public class DeviceViewHolder extends RecyclerView.ViewHolder {
 
-        private final DeviceItemBinding mBinding;
+        private final ItemDeviceBinding mBinding;
 
-        public DeviceViewHolder(DeviceItemBinding binding) {
+        public DeviceViewHolder(@NonNull ItemDeviceBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
             mBinding.btnSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
