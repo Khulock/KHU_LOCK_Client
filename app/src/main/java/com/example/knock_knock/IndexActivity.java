@@ -16,9 +16,7 @@ public class IndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-
-
-        changeFragment("AUTH");
+        changeFragment("HOME");
     }
     @Override
     public void onStart() {

@@ -25,6 +25,11 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogHolder> {
         }
     }
 
+    public void setLogs(List<LogInfo> logs) {
+        mLogs = logs;
+    }
+
+
     @NonNull
     @Override
     public LogHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

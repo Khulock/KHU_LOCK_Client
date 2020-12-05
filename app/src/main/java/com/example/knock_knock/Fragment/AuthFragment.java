@@ -4,8 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.knock_knock.Component.AuthManager;
 import com.example.knock_knock.Component.BluetoothService;
-import com.example.knock_knock.Component.DeviceViewModel;
+import com.example.knock_knock.Component.AppViewModel;
 import com.example.knock_knock.IndexActivity;
 import com.example.knock_knock.Internet.CallApiServer;
 import com.example.knock_knock.databinding.FragmentAuthBinding;
@@ -23,7 +21,7 @@ public class AuthFragment extends Fragment {
 
     private CallApiServer callApiServer;
     private FragmentAuthBinding mBinding;
-    private DeviceViewModel mViewModel;
+    private AppViewModel mViewModel;
     private MutableLiveData<Boolean> isDoorFound;
     private BluetoothService mBluetoothService;
 
