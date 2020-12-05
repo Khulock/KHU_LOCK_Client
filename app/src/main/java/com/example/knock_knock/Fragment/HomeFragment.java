@@ -3,6 +3,7 @@ package com.example.knock_knock.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.knock_knock.Component.BluetoothService;
 import com.example.knock_knock.Component.ControlDialogInterface;
 import com.example.knock_knock.DTO.DeviceInfo;
 import com.example.knock_knock.Component.DeviceListAdapter;
@@ -54,6 +56,8 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
 
         mViewModel.setDeviceInfoList(list);
         mViewModel.setCurDevice(list.get(0));
+
+
 
 
         mBinding.btnOut.setOnClickListener(view -> {

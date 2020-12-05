@@ -1,6 +1,7 @@
 package com.example.knock_knock.Internet;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.example.knock_knock.Component.Const;
 import com.example.knock_knock.Component.DeviceViewModel;
 import com.example.knock_knock.DTO.UserInfo;
+import com.example.knock_knock.IndexActivity;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
@@ -19,8 +21,11 @@ import retrofit2.Response;
 public class CallApiServer {
 
     private final DeviceViewModel mViewModel;
+    private final IndexActivity mActivity;
 
     public CallApiServer(Activity activity) {
+
+        this.mActivity = (IndexActivity) activity;
         mViewModel = new ViewModelProvider((ViewModelStoreOwner) activity, new ViewModelProvider.AndroidViewModelFactory(activity.getApplication()))
                 .get(DeviceViewModel.class);
     }
@@ -46,12 +51,13 @@ public class CallApiServer {
                 UserInfo userInfo = new UserInfo(Const.USER_NAME, id);
                 userInfo.setToken(token);
                 mViewModel.setUserInfo(userInfo);
-            }
 
+                mActivity.changeFragment("HOME");
+            }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                call.request().body();
+                Log.d("ERROR", call.toString());
             }
         });
 
