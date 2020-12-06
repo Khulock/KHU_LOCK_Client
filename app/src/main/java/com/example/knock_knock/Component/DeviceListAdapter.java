@@ -59,7 +59,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
             mBinding = binding;
             mBinding.btnSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    new ControlDialog(mContext, dialogInterface).show("CONTROL",Const.CONTROL_LIGHT);
+                    new ControlDialog(mContext, dialogInterface).show("CONTROL",Const.CONTROL_LIGHT, mBinding.getRoot());
                 }
             });
         }

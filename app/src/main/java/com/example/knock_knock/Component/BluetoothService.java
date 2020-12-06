@@ -30,17 +30,26 @@ public class BluetoothService {
         public void run() {
             mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             mBluetoothScanner = mBluetoothAdapter.getBluetoothLeScanner();
+
             mBluetoothScanner.startScan(new ScanCallback() {
                 @Override
                 public void onScanResult(int callbackType, ScanResult result) {
                     super.onScanResult(callbackType, result);
                     if (result.getDevice().getName() == null) {
+                        Log.d("DUMMY", "dym");
                         return ;
                     }
-                    if (result.getDevice().getName().contains("KhuLock")) {
+
+//                    if (result.getDevice().getAddress().equals("B8:27:EB:62:BB:83")) {
+//                        Log.d("HELLO","FOUND : " + result.getDevice().getName());
+//                        isDoorFound.setValue(true);
+//                    }
+
+                    if (result.getDevice().getName().contains("TV")) {
                         Log.d("HELLO","FOUND : " + result.getDevice().getName());
                         isDoorFound.setValue(true);
                     }
+
                 }
             });
         }

@@ -17,7 +17,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn"
+            app:layout_constraintBottom_toTopOf="@id/btn_enter"
 
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -34,7 +34,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/btn"
+            android:id="@+id/btn_enter"
 
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

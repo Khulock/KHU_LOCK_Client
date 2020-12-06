@@ -26,7 +26,7 @@ public interface ApiService {
             @Path("user_id") Integer userId
     );
 
-    @GET("/device/run/{device_id}/{device_type")
+    @GET("/device/run/{device_id}/{device_type}")
     Call<JsonObject> callToggleDevice(
             @Path("device_id") String deviceId,
             @Path("device_type") String type
@@ -37,6 +37,10 @@ public interface ApiService {
             @Header("Authorization") String token
     );
 
-    // motor light
+    @POST("/group/device")
+    Call<JsonArray> callGetDeviceList(
+            @Body HashMap<String, Integer> param
+    );
+
 
 }

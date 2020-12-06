@@ -54,8 +54,10 @@ public class CallApiServer {
                 int id = response.body().getAsJsonObject("data").get("id").getAsInt();
                 String token = response.body().getAsJsonObject("data").get("token").getAsString();
                 UserInfo userInfo = new UserInfo(Const.USER_NAME, id);
-                userInfo.setToken("Bearer " + token);
+                userInfo.setToken(token);
                 mViewModel.setUserInfo(userInfo);
+
+                mActivity.changeFragment("HOME");
             }
 
             @Override
@@ -70,6 +72,7 @@ public class CallApiServer {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                JsonObject body = response.body();
                 JsonArray history = response.body().get("history").getAsJsonArray();
 
                 List<LogInfo> result = new ArrayList<>();
@@ -78,7 +81,7 @@ public class CallApiServer {
 
                     String access_time = element.getAsJsonObject().get("access_time").getAsString();
                     String date = access_time.split("T")[0];
-                    String time = access_time.split("T")[1].split(".")[0];
+                    String time = access_time.split("T")[1].split("Z")[0];
 
                     String parsedTime = date + " " + time;
 
@@ -96,7 +99,44 @@ public class CallApiServer {
     }
 
     // Device 명단
+    public void callDeviceList(UserInfo userInfo) {
+        HashMap<String, Integer> body = new HashMap<>();
+        body.put("user_id", userInfo.getId());
+        Call<JsonArray> call = mApiService.callGetDeviceList(body);
+        call.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                JsonArray array = response.body();
 
+                List<DeviceInfo> result = new ArrayList<>();
+
+                for (int i = 0; i < array.size(); i++) {
+
+                    JsonElement element = array.get(i);
+
+                    JsonObject asJsonObject = element.getAsJsonObject();
+                    String device_id = asJsonObject.get("device_id").getAsString();
+                    String device_type = asJsonObject.get("device_type").getAsString();
+                    String device_name = asJsonObject.get("device_name").getAsString();
+                    int start_setting = asJsonObject.get("start_setting").getAsInt();
+
+                    DeviceInfo deviceInfo = new DeviceInfo(device_name, device_id, device_type);
+                    deviceInfo.setLevel(start_setting);
+
+                    result.add(deviceInfo);
+                }
+
+                mViewModel.setDeviceInfoList(result);
+                mViewModel.setCurDevice(result.get(0));
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+            }
+        });
+    }
 
     // Device 제어
     public void callToggleDevice(DeviceInfo deviceInfo) {

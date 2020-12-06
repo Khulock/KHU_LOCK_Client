@@ -27,14 +27,12 @@ public class AuthManager {
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-                Toast.makeText(mContext, "AUTH SUCCESS", Toast.LENGTH_LONG).show();
                 apiServer.callOpenDoor();
             }
 
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
-                Toast.makeText(mContext, "FAIL AUTH", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -45,7 +43,6 @@ public class AuthManager {
 
         mBiometricPromptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Knock Knock")
-                .setSubtitle("문을 열기 위해 생체 인증을 진행해주세요")
                 .setDeviceCredentialAllowed(false)
                 .setNegativeButtonText("NO")
                 .build();
