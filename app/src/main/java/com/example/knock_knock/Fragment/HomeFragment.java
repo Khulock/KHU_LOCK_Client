@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
 
         // Device List Recycler view binding
         mBinding.recycleDeviceItem.setLayoutManager(layoutManager);
-        DeviceListAdapter deviceListAdapter = new DeviceListAdapter(mViewModel.getDeviceInfoList(), requireContext(), this);
+        DeviceListAdapter deviceListAdapter = new DeviceListAdapter(mViewModel.getDeviceInfoList(), requireContext(), this, mViewModel);
         mBinding.recycleDeviceItem.setAdapter(deviceListAdapter);
         mViewModel.observeDeviceInfoList().observe(this, deviceInfos -> {
             deviceListAdapter.setDeviceList(deviceInfos);
@@ -90,7 +90,12 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
     public boolean callbackControlDialog(String tag, int index) {
 
         mViewModel.getCurDevice().setLevel(index);
-        mApiCall.callToggleDevice(mViewModel.getCurDevice());
+        mViewModel.setDeviceInfoList(mViewModel.getDeviceInfoList());
+        if (mViewModel.getCurDevice().getLevel() == 0) {
+            mApiCall.callStopDevice(mViewModel.getCurDevice());
+        } else {
+            mApiCall.callRunDevice(mViewModel.getCurDevice());
+        }
 
         return false;
     }

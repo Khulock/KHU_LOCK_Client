@@ -30,7 +30,7 @@
                 android:layout_weight="3"
                 android:maxLines="1"
                 style="@style/TextAppearance.MaterialComponents.Headline1"
-                android:text="Tester's House"
+                android:text="Khulock's House"
                 android:gravity="center" />
 
             <Space

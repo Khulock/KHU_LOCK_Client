@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.knock_knock.Component.AppViewModel;
-import com.example.knock_knock.Component.Const;
 import com.example.knock_knock.Component.ControlDialog;
 import com.example.knock_knock.Component.ControlDialogInterface;
 import com.example.knock_knock.Component.DeviceListAdapter;
@@ -60,7 +59,14 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
         mBinding.btnExit.setOnClickListener(view -> {
 
             mViewModel.getOutDeviceList()
-                    .forEach(outDevice -> { mApiServer.callToggleDevice(outDevice); });
+                    .forEach(outDevice -> {
+                        if (outDevice.getLevel() == 0) {
+                            mApiServer.callStopDevice(outDevice);
+                        } else {
+                            mApiServer.callRunDevice(outDevice);
+                        }
+
+                    });
 
             mApiServer.callOutDoor(mViewModel.getUserInfo());
         });
@@ -69,7 +75,7 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
     private void configOutDeviceRecycler() {
         // out device recycler view bind
         mBinding.recyclerDeviceItem.setLayoutManager(new LinearLayoutManager(requireContext()));
-        DeviceListAdapter listAdapter = new DeviceListAdapter(mViewModel.getOutDeviceList(), requireContext(), this);
+        DeviceListAdapter listAdapter = new DeviceListAdapter(mViewModel.getOutDeviceList(), requireContext(),this, mViewModel);
         mBinding.recyclerDeviceItem.setAdapter(listAdapter);
         mViewModel.observeOutDeviceList().observe(this, deviceInfos -> {
             listAdapter.setDeviceList(deviceInfos);
@@ -113,7 +119,8 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
             }
 
             case "CONTROL": {
-                mViewModel.getCurDevice().setLevel(Integer.parseInt((String) Const.CONTROL_LIGHT[index]));
+                mViewModel.getCurDevice().setLevel(index);
+                mViewModel.setOutDeviceList(mViewModel.getOutDeviceList());
                 break;
             }
         }

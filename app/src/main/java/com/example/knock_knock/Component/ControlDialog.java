@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -32,12 +33,14 @@ public class ControlDialog {
     }
 
     public void show(String tag, CharSequence[] controlList, View root) {
-        mDialogBuilder.setTitle("Control panel")
+        mDialogBuilder.setTitle("Level을 설정해주세요")
                 .setSingleChoiceItems(controlList, -1, ((dialog, which) -> {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    Snackbar.make(root, "Change level to " + controlList[checked], Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(root, "Change level to " + controlList[checked], Snackbar.LENGTH_LONG)
+                            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+                            .show();
                     dialogInterface.callbackControlDialog(tag, checked);
                 }).show();
     }

@@ -19,6 +19,8 @@ public class AppViewModel extends AndroidViewModel {
     private UserInfo userInfo;
     private DeviceInfo curDevice;
 
+    private String macAddress;
+
     private MutableLiveData<List<DeviceInfo>> deviceInfoList;
     private MutableLiveData<List<LogInfo>> logInfoList;
     private MutableLiveData<List<DeviceInfo>> outDeviceList;
@@ -89,5 +91,13 @@ public class AppViewModel extends AndroidViewModel {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public String getMacAddress() {
+        return macAddress;
+    }
+
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 }
