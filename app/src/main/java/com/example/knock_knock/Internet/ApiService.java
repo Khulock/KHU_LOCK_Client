@@ -26,14 +26,17 @@ public interface ApiService {
             @Path("user_id") Integer userId
     );
 
-    @GET("/device/run/{device_id}")
+    @GET("/device/run/{device_id}/{device_type")
     Call<JsonObject> callToggleDevice(
-            @Path("device_id") String deviceId
+            @Path("device_id") String deviceId,
+            @Path("device_type") String type
     );
 
     @GET("/user/out")
     Call<JsonObject> callOutDoor(
             @Header("Authorization") String token
     );
+
+    // motor light
 
 }

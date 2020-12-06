@@ -17,6 +17,7 @@ import com.example.knock_knock.Component.ControlDialog;
 import com.example.knock_knock.Component.ControlDialogInterface;
 import com.example.knock_knock.Component.DeviceListAdapter;
 import com.example.knock_knock.DTO.DeviceInfo;
+import com.example.knock_knock.Internet.CallApiServer;
 import com.example.knock_knock.databinding.FragmentExitBinding;
 
 import java.util.List;
@@ -28,10 +29,12 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
     private AppViewModel mViewModel;
     private Context mContext;
     private List<DeviceInfo> mCandidateOutDeviceList;
+    private CallApiServer mApiServer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mApiServer = new CallApiServer(requireActivity());
         mViewModel = new ViewModelProvider(requireActivity(),
                 new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()))
                 .get(AppViewModel.class);
@@ -50,7 +53,17 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
         super.onStart();
         configOutDeviceRecycler();
         configAddOutDeviceBtn();
+        configOutBtn();
+    }
 
+    private void configOutBtn() {
+        mBinding.btnOut.setOnClickListener(view -> {
+
+            mViewModel.getOutDeviceList()
+                    .forEach(outDevice -> { mApiServer.callToggleDevice(outDevice); });
+
+            mApiServer.callOutDoor(mViewModel.getUserInfo());
+        });
     }
 
     private void configOutDeviceRecycler() {
