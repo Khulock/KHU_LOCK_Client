@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.knock_knock.DTO.DeviceInfo;
+import com.example.knock_knock.R;
 import com.example.knock_knock.databinding.ItemDeviceBinding;
 
 import java.util.ArrayList;
@@ -65,6 +66,21 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.De
 
         public void bind(DeviceInfo info) {
             mBinding.setName(info.getName());
+            switch (info.getType()) {
+                case "light": {
+                    mBinding.icon.setImageResource(R.drawable.ic_baseline_wb_incandescent_24);
+                    break;
+                }
+
+                case "motor": {
+                    mBinding.icon.setImageResource(R.drawable.ic_outline_motor_24);
+                    break;
+                }
+
+                default: {
+                    break;
+                }
+            }
         }
     }
 }

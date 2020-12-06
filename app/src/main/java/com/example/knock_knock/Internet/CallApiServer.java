@@ -95,8 +95,12 @@ public class CallApiServer {
         });
     }
 
+    // Device 명단
+
+
+    // Device 제어
     public void callToggleDevice(DeviceInfo deviceInfo) {
-        Call<JsonObject> call = mApiService.callToggleDevice(deviceInfo.getId());
+        Call<JsonObject> call = mApiService.callToggleDevice(deviceInfo.getId(), deviceInfo.getType());
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -109,6 +113,7 @@ public class CallApiServer {
         });
     }
 
+    // 퇴장
     public void callOutDoor(UserInfo user) {
         Call<JsonObject> call = mApiService.callOutDoor(user.getToken());
         call.enqueue(new Callback<JsonObject>() {

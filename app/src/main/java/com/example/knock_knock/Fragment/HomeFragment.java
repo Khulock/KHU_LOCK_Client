@@ -52,9 +52,9 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
         List<DeviceInfo> list = new ArrayList<>();
 
         // Server - 500
-        DeviceInfo deviceInfo = new DeviceInfo("AAA", "BBB");
+        DeviceInfo deviceInfo = new DeviceInfo("AAA", "BBB", "light");
         list.add(deviceInfo);
-        DeviceInfo deviceInfo2 = new DeviceInfo("CCC", "DDD");
+        DeviceInfo deviceInfo2 = new DeviceInfo("CCC", "DDD", "motor");
         list.add(deviceInfo2);
 
         mCaller.callOpenDoor();
