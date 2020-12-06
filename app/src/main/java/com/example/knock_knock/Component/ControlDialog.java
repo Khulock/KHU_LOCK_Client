@@ -1,9 +1,11 @@
 package com.example.knock_knock.Component;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -24,18 +26,18 @@ public class ControlDialog {
 
 
 
-    public void show(String tag, List<String> controlList) {
+    public void show(String tag, List<String> controlList, View root) {
         CharSequence[] mDeviceList = controlList.toArray(new CharSequence[controlList.size()]);
-        show(tag, mDeviceList);
+        show(tag, mDeviceList, root);
     }
 
-    public void show(String tag, CharSequence[] controlList) {
+    public void show(String tag, CharSequence[] controlList, View root) {
         mDialogBuilder.setTitle("Control panel")
                 .setSingleChoiceItems(controlList, -1, ((dialog, which) -> {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    Toast.makeText(mContext, "Change level to " + controlList[checked], Toast.LENGTH_LONG).show();
+                    Snackbar.make(root, "Change level to " + controlList[checked], Snackbar.LENGTH_LONG).show();
                     dialogInterface.callbackControlDialog(tag, checked);
                 }).show();
     }

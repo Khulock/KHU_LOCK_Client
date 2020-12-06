@@ -57,7 +57,7 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
     }
 
     private void configOutBtn() {
-        mBinding.btnOut.setOnClickListener(view -> {
+        mBinding.btnExit.setOnClickListener(view -> {
 
             mViewModel.getOutDeviceList()
                     .forEach(outDevice -> { mApiServer.callToggleDevice(outDevice); });
@@ -78,7 +78,7 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
     }
 
     private void configAddOutDeviceBtn() {
-        mBinding.btnOut.setOnClickListener(v -> {
+        mBinding.btnAdd.setOnClickListener(v -> {
 
             ControlDialog controlDialog = new ControlDialog(mContext, this);
 
@@ -91,7 +91,7 @@ public class ExitFragment extends Fragment implements ControlDialogInterface {
                     .map(DeviceInfo::getName)
                     .collect(Collectors.toList());
 
-            controlDialog.show("DEVICE",collect);
+            controlDialog.show("DEVICE",collect, mBinding.getRoot());
         });
     }
 
