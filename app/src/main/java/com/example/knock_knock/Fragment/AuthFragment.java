@@ -82,6 +82,7 @@ public class AuthFragment extends Fragment {
 
         isDoorFound.observe(this, isFound -> {
             if(isFound) {
+                mBinding.btnEnter.setVisibility(View.VISIBLE);
                 requireActivity().unregisterReceiver(receiver);
                 Snackbar.make(mBinding.getRoot(), "도어락을 찾았습니다. 생체인증을 진행해주세요.", Snackbar.LENGTH_LONG)
                         .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
@@ -89,6 +90,7 @@ public class AuthFragment extends Fragment {
             }
         });
 
+        mBinding.btnEnter.setVisibility(View.GONE);
         mBinding.btnEnter.setOnClickListener(view -> {
 //            new AuthManager(requireContext(), callApiServer).runAuth();
             callApiServer.callOpenDoor();
@@ -114,6 +116,7 @@ public class AuthFragment extends Fragment {
                 }
 
                 if (device.getName().contains("Khu")) {
+                    mViewModel.setMacAddress(device.getName().split("_")[1]);
                     isDoorFound.setValue(true);
                 }
             }

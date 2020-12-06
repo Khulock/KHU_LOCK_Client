@@ -26,11 +26,19 @@ public interface ApiService {
             @Path("user_id") Integer userId
     );
 
-    @GET("/device/run/{device_id}/{device_type}")
-    Call<JsonObject> callToggleDevice(
+    @POST("/device/run/{device_id}/{device_type}")
+    Call<JsonObject> callRunDevice(
+            @Path("device_id") String deviceId,
+            @Path("device_type") String type,
+            @Body HashMap<String, Integer> body
+    );
+
+    @GET("/device/stop/{device_id}/{device_type}")
+    Call<JsonObject> callStopDevice(
             @Path("device_id") String deviceId,
             @Path("device_type") String type
     );
+
 
     @GET("/user/out")
     Call<JsonObject> callOutDoor(

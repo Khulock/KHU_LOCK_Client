@@ -43,7 +43,7 @@ public class CallApiServer {
 
         HashMap<String, String> body = new HashMap<>();
         body.put("user_name", Const.USER_NAME);
-        body.put("door_mac", Const.USER_MAC);
+        body.put("door_mac", mViewModel.getMacAddress());
 
         Call<JsonObject> call = mApiService.callOpenDoor(body);
 
@@ -120,10 +120,12 @@ public class CallApiServer {
                     String device_name = asJsonObject.get("device_name").getAsString();
                     int start_setting = asJsonObject.get("start_setting").getAsInt();
 
-                    DeviceInfo deviceInfo = new DeviceInfo(device_name, device_id, device_type);
-                    deviceInfo.setLevel(start_setting);
+                    DeviceInfo inputDevice = new DeviceInfo(device_name, device_id, device_type);
+                    inputDevice.setLevel(start_setting);
 
-                    result.add(deviceInfo);
+                    callRunDevice(inputDevice);
+
+                    result.add(inputDevice);
                 }
 
                 mViewModel.setDeviceInfoList(result);
@@ -138,9 +140,11 @@ public class CallApiServer {
         });
     }
 
-    // Device 제어
-    public void callToggleDevice(DeviceInfo deviceInfo) {
-        Call<JsonObject> call = mApiService.callToggleDevice(deviceInfo.getId(), deviceInfo.getType());
+    // Device 작동
+    public void callRunDevice(DeviceInfo deviceInfo) {
+        HashMap<String, Integer> body = new HashMap<>();
+        body.put("setting", deviceInfo.getLevel());
+        Call<JsonObject> call = mApiService.callRunDevice(deviceInfo.getId(), deviceInfo.getType(), body);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -149,6 +153,22 @@ public class CallApiServer {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+            }
+        });
+    }
+
+    // Device 중지
+    public void callStopDevice(DeviceInfo deviceInfo) {
+        Call<JsonObject> call = mApiService.callStopDevice(deviceInfo.getId(), deviceInfo.getType());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
             }
         });
     }
