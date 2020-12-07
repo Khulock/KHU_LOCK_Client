@@ -10,6 +10,6 @@ public class Const {
 
 
 
-    public static final CharSequence[] CONTROL_LIGHT = {"0", "1", "2", "3", "4"};
+    public static final CharSequence[] CONTROL_LIGHT = {"OFF", "1 단계", "2 단계", "3 단계", "4 단계"};
 
 }

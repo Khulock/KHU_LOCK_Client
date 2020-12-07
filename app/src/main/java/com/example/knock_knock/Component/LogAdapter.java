@@ -38,7 +38,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull LogHolder holder, int position) {
-        holder.bind(mLogs.get(position));
+        holder.bind(mLogs.get(mLogs.size()-position-1));
     }
 
     @Override

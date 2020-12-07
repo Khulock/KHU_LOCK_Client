@@ -33,14 +33,25 @@ public class ControlDialog {
     }
 
     public void show(String tag, CharSequence[] controlList, View root) {
-        mDialogBuilder.setTitle("Level을 설정해주세요")
-                .setSingleChoiceItems(controlList, -1, ((dialog, which) -> {
+        mDialogBuilder.setSingleChoiceItems(controlList, -1, ((dialog, which) -> {
                     checked = which;
                 }))
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    Snackbar.make(root, "Change level to " + controlList[checked], Snackbar.LENGTH_LONG)
+
+                    String text;
+                    if (tag.equals("CONTROL")) {
+                        if (checked == 0) { text = "기기를 종료합니다"; } else {
+                            text = "기기를 " + controlList[checked] + "로 조절합니다";
+                        }
+
+
+                    } else {
+                        text = "추가 완료 했습니다";
+                    }
+                    Snackbar.make(root, text, Snackbar.LENGTH_SHORT)
                             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
                             .show();
+
                     dialogInterface.callbackControlDialog(tag, checked);
                 }).show();
     }
