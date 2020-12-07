@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment implements ControlDialogInterface{
             mApiCall.callRunDevice(mViewModel.getCurDevice());
         }
 
+
         return false;
     }
 }

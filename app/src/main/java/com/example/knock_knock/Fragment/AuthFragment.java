@@ -33,7 +33,7 @@ public class AuthFragment extends Fragment {
     private CallApiServer callApiServer;
     private FragmentAuthBinding mBinding;
     private AppViewModel mViewModel;
-    private MutableLiveData<Boolean> isDoorFound;
+    private MutableLiveData<Boolean> isDoorFound = new MutableLiveData<Boolean>();
     private BluetoothService mBluetoothService;
 
     public AuthFragment() {
@@ -92,15 +92,15 @@ public class AuthFragment extends Fragment {
 
         mBinding.btnEnter.setVisibility(View.GONE);
         mBinding.btnEnter.setOnClickListener(view -> {
-//            new AuthManager(requireContext(), callApiServer).runAuth();
-            callApiServer.callOpenDoor();
+            new AuthManager(requireContext(), callApiServer).runAuth();
+//            callApiServer.callOpenDoor();
         });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        isDoorFound.setValue(true);
+//        isDoorFound.setValue(true);
     }
 
 
@@ -116,7 +116,7 @@ public class AuthFragment extends Fragment {
                 }
 
                 if (device.getName().contains("Khu")) {
-                    mViewModel.setMacAddress(device.getName().split("_")[1]);
+                    mViewModel.setMacAddress(device.getAddress());
                     isDoorFound.setValue(true);
                 }
             }

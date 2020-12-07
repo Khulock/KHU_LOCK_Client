@@ -19,7 +19,7 @@ public class AppViewModel extends AndroidViewModel {
     private UserInfo userInfo;
     private DeviceInfo curDevice;
 
-    private String macAddress;
+    private String macAddress = Const.USER_MAC;
 
     private MutableLiveData<List<DeviceInfo>> deviceInfoList;
     private MutableLiveData<List<LogInfo>> logInfoList;
